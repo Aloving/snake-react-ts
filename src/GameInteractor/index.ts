@@ -17,10 +17,9 @@ export class GameInteractor {
     private snake: Snake;
     private board: Board;
     private controller: (e: KeyboardEvent) => Direction;
+    private score: number;
 
-    constructor(
-        boardSizes: SizeProperties
-    ) {
+    constructor(boardSizes: SizeProperties) {
         this.board = new Board(boardSizes);
         this.snake = new Snake(
             config.initialSnakePosition.x,
@@ -31,6 +30,7 @@ export class GameInteractor {
 
         this.snake.on(SnakeEvents.MOVE, this.checkTreatCollision);
         this.controller = new GameController(GameControllerType.BROWSER).handler();
+        this.score = 0;
     }
 
     /**
@@ -41,8 +41,16 @@ export class GameInteractor {
 
         return {
             bitMap: this.makeBitMap(),
+            score: this.getScore(),
             status: this.prepareGameStatus()
         }
+    }
+
+    /**
+     * Получение счетчика
+     */
+    public getScore(): number {
+        return this.score;
     }
 
     /**
@@ -125,6 +133,7 @@ export class GameInteractor {
             if (coord.x === treatCoords.x && coord.y === treatCoords.y) {
                 this.snake.elongate(1);
                 this.board.updateTreat();
+                this.score += 1;
             }
         });
     }

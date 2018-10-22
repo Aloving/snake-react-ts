@@ -8,7 +8,13 @@ import {keyHandler} from '../../actions/game';
 import {Store} from '../../types/Store';
 import {DispatchEvents, FromStore} from './types';
 
-const mapStateToProps: MapStateToProps<FromStore, {}, Store> = ({bitMap}) => ({bitMap});
+const mapStateToProps: MapStateToProps<FromStore, {}, Store> = ({
+    bitMap,
+    score
+}) => ({
+    bitMap,
+    score
+});
 const mapDispatchToProps: MapDispatchToProps<DispatchEvents, {}> = (dispatch) => bindActionCreators(
     {keyHandler},
     dispatch

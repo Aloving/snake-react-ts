@@ -2,7 +2,7 @@ import {ThunkAction} from 'redux-thunk';
 
 import {interactor} from '../interactor';
 
-import {setBitMap} from './game';
+import {setBitMap, updateScore} from './game';
 
 import {
     Action,
@@ -11,7 +11,8 @@ import {
 
 export const startGame = (): ThunkAction<void, Store, {}, Action> => (dispatch) => {
     setInterval(() => {
-        const newGameState = interactor.gameLoop();
-        dispatch(setBitMap(newGameState.bitMap));
+        const {bitMap, score} = interactor.gameLoop();
+        dispatch(updateScore(score));
+        dispatch(setBitMap(bitMap));
     }, 500);
 };

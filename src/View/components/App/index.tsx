@@ -12,10 +12,13 @@ export class App extends React.PureComponent<Props> {
     }
 
     public render() {
-        const {bitMap} = this.props;
+        const {bitMap, score} = this.props;
 
         return (
           <div className='App'>
+              <div className='info'>
+                  <span>score: {score}</span>
+              </div>
               <div className='board'>
                   {bitMap && bitMap.map((row, index) => {
                       return (

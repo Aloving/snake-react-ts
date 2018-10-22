@@ -17,6 +17,13 @@ export const mainReducer: Reducer<Store> = (state = initialState, {type, payload
             }
         }
 
+        case ViewGameAction.UPDATE_SCORE: {
+            return {
+                ...state,
+                score: payload
+            }
+        }
+
         default:
             return state;
     }

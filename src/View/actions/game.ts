@@ -12,6 +12,11 @@ export const setBitMap = (bitMap: BitMap) => ({
    type: ViewGameAction.SET_BIT_MAP
 });
 
+export const updateScore = (score: number) => ({
+    payload: score,
+    type: ViewGameAction.UPDATE_SCORE
+});
+
 export const keyHandler = (e: KeyboardEvent): ThunkAction<void, Store, {}, Action> => () => {
     interactor.keyHandler(e);
 };

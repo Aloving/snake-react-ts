@@ -4,4 +4,5 @@ import {BitMap} from '../types/BitMap';
 export interface InteractorLoopOutput {
     status: GameStatus;
     bitMap: BitMap;
+    score: number;
 }
