@@ -19,4 +19,5 @@ export interface DispatchEvents {
     updateSpeed: (speed: number) => Action;
     updateWidth: (width: number) => Action;
     startGame: (setting: Settings) => ThunkAction<void, Store, {}, Action>;
+    reTry: () => ThunkAction<void, Store, {}, Action>;
 }

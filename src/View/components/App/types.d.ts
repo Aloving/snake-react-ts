@@ -16,4 +16,5 @@ export interface Props {
     updateHeight: (height: number) => Action;
     updateSpeed: (speed: number) => Action;
     updateWidth: (width: number) => Action;
+    reTry: () => ThunkAction<void, Store, {}, Action>;
 }

@@ -46,6 +46,13 @@ export class GameInteractor {
     }
 
     /**
+     * Обновление счета
+     */
+    public updateScore(score: number) {
+        this.score = score;
+    }
+
+    /**
      * Создание новой игры
      * @param {SizeProperties} boardSizes
      */

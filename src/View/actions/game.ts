@@ -7,6 +7,7 @@ import {ViewGameAction} from '../enums/actions/game';
 
 import {GameScreen} from '../enums/gameStatus';
 import {Action, Store} from '../types/Store';
+import {startGame} from './startGame';
 
 export const setBitMap = (bitMap: BitMap) => ({
    payload: bitMap,
@@ -25,5 +26,11 @@ export const setGameScreen = (screen: GameScreen) => ({
 
 export const keyHandler = (e: KeyboardEvent): ThunkAction<void, Store, {}, Action> => () => {
     interactor.keyHandler(e);
+};
+
+export const reTry = (): ThunkAction<void, Store, {}, Action> => (dispatch, getStoreState) => {
+    const state: Store = getStoreState();
+
+    dispatch(startGame(state.settings));
 };
 

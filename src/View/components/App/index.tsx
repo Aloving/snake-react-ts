@@ -15,6 +15,7 @@ export class App extends React.PureComponent<Props> {
     public render() {
         const {
             bitMap,
+            reTry,
             score,
             screen,
             settings,
@@ -34,7 +35,7 @@ export class App extends React.PureComponent<Props> {
                     <div className='popup'>
                         <div>
                             <div>THE_END</div>
-                            <button>start again</button>
+                            <button onClick={reTry}>start again</button>
                       </div>
                   </div>
               }
@@ -72,6 +73,7 @@ export class App extends React.PureComponent<Props> {
                                           updateSpeed(+e.target.value)
                                       }}
                                   />
+                                  <span>1 - 10</span>
                               </div>
                               <button
                                   onClick={() => {

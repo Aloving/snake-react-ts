@@ -8,6 +8,8 @@ import {
     updateScore
 } from './game';
 
+import {speedMap} from '../constants/speedMap';
+
 import {GameStatus} from '../../GameInteractor/GameStatus';
 import {GameScreen} from '../enums/gameStatus';
 import {Settings} from '../types/Settings';
@@ -29,6 +31,8 @@ export const startGame = (
     });
 
     dispatch(setGameScreen(GameScreen.PLAYING));
+    dispatch(updateScore(0));
+    interactor.updateScore(0);
 
     const startGame = setInterval(() => {
         const {bitMap, score, status} = interactor.gameLoop();
@@ -40,5 +44,5 @@ export const startGame = (
             clearInterval(startGame);
             dispatch(setGameScreen(GameScreen.THE_END));
         }
-    }, speed);
+    }, speedMap[speed]);
 };

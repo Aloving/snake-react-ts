@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {App} from '../../components/App/';
 
 import {keyHandler} from '../../actions/game';
+import {reTry} from '../../actions/game';
 import {updateHeight, updateSpeed, updateWidth} from '../../actions/settings';
 import {startGame} from '../../actions/startGame';
 
@@ -24,6 +25,7 @@ const mapStateToProps: MapStateToProps<FromStore, {}, Store> = ({
 const mapDispatchToProps: MapDispatchToProps<DispatchEvents, {}> = (dispatch) => bindActionCreators(
     {
         keyHandler,
+        reTry,
         startGame,
         updateHeight,
         updateSpeed,
