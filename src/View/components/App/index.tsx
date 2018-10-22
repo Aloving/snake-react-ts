@@ -13,21 +13,79 @@ export class App extends React.PureComponent<Props> {
     }
 
     public render() {
-        const {bitMap, score, screen} = this.props;
+        const {
+            bitMap,
+            score,
+            screen,
+            settings,
+            startGame,
+            updateWidth,
+            updateSpeed,
+            updateHeight
+        } = this.props;
 
         return (
-          <div className='App'>
-              <div className='info'>
+            <div className='App'>
+                <div className='info'>
                   <span>score: {score}</span>
-              </div>
-              {
-                  screen === GameScreen.THE_END &&
-                  <div className='the_end_screen'>
-                      <div>
-                          <div>THE_END</div>
-                        <button>start again</button>
+                </div>
+                {
+                    screen === GameScreen.THE_END &&
+                    <div className='popup'>
+                        <div>
+                            <div>THE_END</div>
+                            <button>start again</button>
                       </div>
                   </div>
+              }
+              {
+                  screen === GameScreen.SETTINGS &&
+                      <div className='popup'>
+                          <div>
+                              <div>
+                                  <label>Высота:</label>
+                                  <input
+                                      type='input'
+                                      value={settings.height}
+                                      onChange={(e) => {
+                                          updateHeight(+e.target.value)
+                                      }}
+                                  />
+                              </div>
+                              <div>
+                                  <label>Ширина:</label>
+                                  <input
+                                      type='input'
+                                      value={settings.width}
+                                      onChange={(e) => {
+                                          updateWidth(+e.target.value)
+                                      }}
+                                  />
+                              </div>
+
+                              <div>
+                                  <label>Скорость:</label>
+                                  <input
+                                      type='input'
+                                      value={settings.speed}
+                                      onChange={(e) => {
+                                          updateSpeed(+e.target.value)
+                                      }}
+                                  />
+                              </div>
+                              <button
+                                  onClick={() => {
+                                      startGame({
+                                          height: settings.height,
+                                          speed: settings.speed,
+                                          width: settings.width
+                                      })
+                                  }}
+                              >
+                                  start game
+                              </button>
+                          </div>
+                      </div>
               }
               <div className='board'>
                   {bitMap && bitMap.map((row, index) => {

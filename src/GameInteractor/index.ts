@@ -28,7 +28,6 @@ export class GameInteractor {
             config.initialDirection
         );
 
-        this.snake.on(SnakeEvents.MOVE, this.checkTreatCollision);
         this.controller = new GameController(GameControllerType.BROWSER).handler();
         this.score = 0;
     }
@@ -44,6 +43,24 @@ export class GameInteractor {
             score: this.getScore(),
             status: this.prepareGameStatus()
         }
+    }
+
+    /**
+     * Создание новой игры
+     * @param {SizeProperties} boardSizes
+     */
+    public newGame(boardSizes: SizeProperties) {
+        this.board = new Board(
+            boardSizes
+        );
+
+        this.snake = new Snake(
+            config.initialSnakePosition.x,
+            config.initialSnakePosition.y,
+            boardSizes,
+            config.initialDirection
+        );
+        this.snake.on(SnakeEvents.MOVE, this.checkTreatCollision);
     }
 
     /**

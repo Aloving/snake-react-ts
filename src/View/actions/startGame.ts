@@ -10,12 +10,26 @@ import {
 
 import {GameStatus} from '../../GameInteractor/GameStatus';
 import {GameScreen} from '../enums/gameStatus';
+import {Settings} from '../types/Settings';
 import {
     Action,
     Store
 } from '../types/Store';
 
-export const startGame = (): ThunkAction<void, Store, {}, Action> => (dispatch) => {
+export const startGame = (
+    {
+        width,
+        height,
+        speed
+    }: Settings
+): ThunkAction<void, Store, {}, Action> => (dispatch) => {
+    interactor.newGame({
+        height,
+        width
+    });
+
+    dispatch(setGameScreen(GameScreen.PLAYING));
+
     const startGame = setInterval(() => {
         const {bitMap, score, status} = interactor.gameLoop();
 
@@ -26,5 +40,5 @@ export const startGame = (): ThunkAction<void, Store, {}, Action> => (dispatch) 
             clearInterval(startGame);
             dispatch(setGameScreen(GameScreen.THE_END));
         }
-    }, 200);
+    }, speed);
 };
