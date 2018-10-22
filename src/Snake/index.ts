@@ -2,7 +2,9 @@ import {EventEmitter} from '../utils/EventEmitter';
 
 import Coordinates from '../interfaces/Coordinates';
 import SizeProperties from '../interfaces/SizeProperties';
+
 import {Direction} from './direction.enum';
+import {SnakeEvents} from './events.enum';
 
 export class Snake extends EventEmitter {
     /**
@@ -28,7 +30,7 @@ export class Snake extends EventEmitter {
     public constructor(
         initialX: number,
         initialY: number,
-        size: SizeProperties,
+        boardSize: SizeProperties,
         directionInit: Direction)
     {
         super();
@@ -36,7 +38,7 @@ export class Snake extends EventEmitter {
         this.elements = [];
         this.elements.push({x : initialX, y : initialY});
         this.direction = directionInit;
-        this.boardSize = size;
+        this.boardSize = boardSize;
         this.elongation = 0;
     }
 
@@ -52,7 +54,7 @@ export class Snake extends EventEmitter {
         if (this.elongation) {
             this.elongation--;
         } else {
-            this.elements = this.elements.slice(1); // pop the last one
+            this.elements = this.elements.slice(1);
         }
 
         let newElement: Coordinates;
@@ -98,13 +100,13 @@ export class Snake extends EventEmitter {
         /**
          * Оповещение о том что змейка была перемещена
          */
-        this.emit('snake/moved');
+        this.emit(SnakeEvents.MOVE);
 
         if (!this.isLastMoveValid()) {
             /**
              * Событие о том что был сделан не "валидный" ход
              */
-            this.emit('snake/ended')
+            this.emit(SnakeEvents.END)
         }
     }
 
@@ -116,7 +118,7 @@ export class Snake extends EventEmitter {
         const lastElement = this.elements[this.elements.length-1];
         let isValid = true;
         this.elements.forEach(element => {
-            if (element != lastElement && element.x == lastElement.x && element.y == lastElement.y) {
+            if (element !== lastElement && element.x === lastElement.x && element.y === lastElement.y) {
                 isValid = false;
             }
         });
@@ -127,11 +129,15 @@ export class Snake extends EventEmitter {
      * Вставить новое направление движения
      */
     public setDirection(direction: Direction) {
+        if(!direction) {
+            return;
+        }
+
         if (this.getOpposite(direction) === this.direction) {
             return;
-        } else {
-            this.direction = direction;
         }
+
+        this.direction = direction;
     }
 
     /**

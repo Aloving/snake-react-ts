@@ -9,6 +9,7 @@
   },
   "rules": {
     "interface-name" : [true, "never-prefix"],
-    "ban-types": [false, ["Function"]]
+    "ban-types": [false, ["Function"]],
+    "no-console": false
   }
 }

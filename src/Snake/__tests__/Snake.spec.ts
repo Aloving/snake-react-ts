@@ -1,5 +1,5 @@
-import {Direction} from '../direction.enum';
 import {Snake} from '../';
+import {Direction} from '../direction.enum';
 
 describe('Snake testing', () => {
     it('setDirection and getDirection should set and get the same direction', () => {
