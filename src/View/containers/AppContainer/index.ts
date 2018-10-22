@@ -10,10 +10,12 @@ import {DispatchEvents, FromStore} from './types';
 
 const mapStateToProps: MapStateToProps<FromStore, {}, Store> = ({
     bitMap,
-    score
+    screen,
+    score,
 }) => ({
     bitMap,
-    score
+    score,
+    screen
 });
 const mapDispatchToProps: MapDispatchToProps<DispatchEvents, {}> = (dispatch) => bindActionCreators(
     {keyHandler},

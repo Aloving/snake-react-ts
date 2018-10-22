@@ -1,10 +1,12 @@
 import {Reducer} from 'redux';
 
 import {ViewGameAction} from '../enums/actions/game';
+import {GameScreen} from '../enums/gameStatus';
 import {Store} from '../types/Store';
 
 const initialState: Store = {
-    score: 0
+    score: 0,
+    screen: GameScreen.PLAYING
 };
 
 export const mainReducer: Reducer<Store> = (state = initialState, {type, payload}) => {
@@ -22,6 +24,13 @@ export const mainReducer: Reducer<Store> = (state = initialState, {type, payload
                 ...state,
                 score: payload
             }
+        }
+
+        case ViewGameAction.SET_GAME_SCREEN: {
+            return {
+                ...state,
+                screen: payload
+            };
         }
 
         default:

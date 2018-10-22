@@ -37,8 +37,6 @@ export class GameController {
     private browserHandler = (e: KeyboardEvent): Direction => {
         const key = e.keyCode;
 
-        console.log(key);
-
         return browserBinds[key] || '';
     }
 }

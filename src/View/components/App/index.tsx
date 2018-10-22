@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {Block} from '../Block';
 
+import {GameScreen} from '../../enums/gameStatus';
 import {Props} from './types';
 
 export class App extends React.PureComponent<Props> {
@@ -12,13 +13,22 @@ export class App extends React.PureComponent<Props> {
     }
 
     public render() {
-        const {bitMap, score} = this.props;
+        const {bitMap, score, screen} = this.props;
 
         return (
           <div className='App'>
               <div className='info'>
                   <span>score: {score}</span>
               </div>
+              {
+                  screen === GameScreen.THE_END &&
+                  <div className='the_end_screen'>
+                      <div>
+                          <div>THE_END</div>
+                        <button>start again</button>
+                      </div>
+                  </div>
+              }
               <div className='board'>
                   {bitMap && bitMap.map((row, index) => {
                       return (
