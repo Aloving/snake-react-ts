@@ -13,5 +13,5 @@ export const startGame = (): ThunkAction<void, Store, {}, Action> => (dispatch) 
     setInterval(() => {
         const newGameState = interactor.gameLoop();
         dispatch(setBitMap(newGameState.bitMap));
-    }, 100);
+    }, 500);
 };

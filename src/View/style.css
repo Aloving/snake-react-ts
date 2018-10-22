@@ -1,5 +1,22 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.board {
+  font-size: 0;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.cell_view_empty {
+  border: 1px solid #000;
+}
+
+.cell_view_snake {
+  background: #000;
+}
+
+.cell_view_treat {
+  background: royalblue;
 }

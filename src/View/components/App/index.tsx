@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import {Block} from '../Block';
+
 import {Props} from './types';
 
 export class App extends React.PureComponent<Props> {
@@ -13,29 +15,21 @@ export class App extends React.PureComponent<Props> {
         const {bitMap} = this.props;
 
         return (
-          <div className="App">
-              {bitMap && bitMap.map((row, index) => {
-                  return (
-                      <div key={index}>
-                          {this.makeRow(row)}
-                      </div>
-                  );
-              })}
+          <div className='App'>
+              <div className='board'>
+                  {bitMap && bitMap.map((row, index) => {
+                      return (
+                          <div key={index}>
+                              {this.makeRow(row)}
+                          </div>
+                      );
+                  })}
+              </div>
           </div>
         );
     }
 
     private makeRow(row: number[]) {
-        return row.map((num, index) => {
-            return (
-                <span key={index}>
-                    {
-                        num
-                            ? <b key={index}>{num}</b>
-                            : <span>{num}</span>
-                    }
-                </span>
-            )
-        });
+        return row.map((num, index) => <Block bit={num} key={index}/>);
     }
 }

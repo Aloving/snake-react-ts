@@ -1,5 +1,5 @@
 import {Board} from '../Board';
-import {BitMapElements} from '../enums/BitMapElements';
+import {BitMapElement} from '../enums/BitMapElements';
 import {GameController} from '../GameController';
 import {InteractorLoopOutput} from '../interfaces/InteractorLoopOutput';
 import {Snake} from '../Snake';
@@ -19,8 +19,7 @@ export class GameInteractor {
     private controller: (e: KeyboardEvent) => Direction;
 
     constructor(
-        boardSizes: SizeProperties,
-        speed: number
+        boardSizes: SizeProperties
     ) {
         this.board = new Board(boardSizes);
         this.snake = new Snake(
@@ -65,28 +64,16 @@ export class GameInteractor {
         const treatCoords = this.board.getTreat();
 
         const snakeMap = snakeCoords.reduce((res, {x, y}) => {
-            res[this.createHashKeyByXY(x, y)] = BitMapElements.SNAKE;
+            res[this.createHashKeyByXY(x, y)] = BitMapElement.SNAKE;
 
             return res;
         }, {});
 
         const treatMap = {
-            [this.createHashKeyByXY(treatCoords.x, treatCoords.y)]: BitMapElements.TREAT
+            [this.createHashKeyByXY(treatCoords.x, treatCoords.y)]: BitMapElement.TREAT
         };
 
-        // const emptyMap = {};
-
         const twoDMap: number[][] = [];
-
-
-        // for (let i = 0; i < boardCoords.width; i++) {
-        //     let row = [];
-        //     for(let j = 0; j < boardCoords.height; j++) {
-        //         const itsHashKey = this.createHashKeyByXY(i, j);
-        //
-        //         emptyMap[itsHashKey] = BitMapElements.EMPTY;
-        //     }
-        // }
 
         for (let i = 0; i < boardCoords.width; i++) {
             const row: number[] = [];
@@ -94,16 +81,16 @@ export class GameInteractor {
                 const itsHashKey = this.createHashKeyByXY(i, j);
 
                 if (snakeMap[itsHashKey]) {
-                    row.push(BitMapElements.SNAKE);
+                    row.push(BitMapElement.SNAKE);
                     continue;
                 }
 
                 if (treatMap[itsHashKey]) {
-                    row.push(BitMapElements.TREAT);
+                    row.push(BitMapElement.TREAT);
                     continue;
                 }
 
-                row.push(BitMapElements.EMPTY);
+                row.push(BitMapElement.EMPTY);
             }
             twoDMap.push(row);
         }
