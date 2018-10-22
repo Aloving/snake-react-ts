@@ -11,7 +11,7 @@ export class Board {
     private treat: Coordinates;
 
     constructor(private sizeProperties: SizeProperties) {
-        this.treat = {x: 13, y: 14};
+        this.treat = this.calcRandomPosition();
     }
 
     /**
